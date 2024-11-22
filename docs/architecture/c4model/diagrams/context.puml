@@ -1,0 +1,8 @@
+@startuml C4_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+Person(client, "Cliente", "Usuário do sistema")
+System(serviceDiscovery, "Service Discovery", "Sistema de registro e descoberta de serviços")
+System_Ext(microservices, "Microsserviços", "Serviços que se registram no Service Discovery")
+Rel(client, serviceDiscovery, "Consulta serviços disponíveis")
+Rel(microservices, serviceDiscovery, "Registra-se e consulta outros serviços")
+@enduml

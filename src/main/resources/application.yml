@@ -1,0 +1,17 @@
+#logging:
+#  level:
+#    com.netflix: TRACE
+#    org.springframework.boot: TRACE
+
+server:
+  port: 8761
+spring:
+  application:
+    name: service-discovery
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+

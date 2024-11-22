@@ -1,0 +1,14 @@
+@startuml C4_Container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(client, "Cliente", "Usuário do sistema")
+System_Boundary(serviceDiscovery, "Service Discovery") {
+Container(eurekaServer, "Eureka Server", "Spring Cloud Netflix", "Servidor de registro e descoberta")
+Container(actuator, "Spring Actuator", "Spring Boot", "Monitoramento e métricas")
+ContainerDb(registry, "Registro de Serviços", "Em memória", "Armazena informações dos serviços registrados")
+}
+System_Ext(microservices, "Microsserviços", "Serviços que se registram no Service Discovery")
+Rel(client, eurekaServer, "Consulta", "HTTP/REST")
+Rel(microservices, eurekaServer, "Registra-se/Consulta", "HTTP/REST")
+Rel(eurekaServer, registry, "Lê/Escreve")
+Rel(actuator, eurekaServer, "Monitora")
+@enduml

@@ -1,0 +1,119 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
+    "properties": {
+        "instance": {"$ref": "#/$defs/instance"},
+        "dataCenterInfo": {"$ref": "#/$defs/dataCenterInfo"},
+        "leaseInfo": {"$ref": "#/$defs/leaseInfo"}
+    },
+    "$defs": {
+        "amazonMetdataType": {
+            "type": "object",
+            "required": [
+                "amilaunchindex",
+                "localhostname",
+                "availabilityzone",
+                "instanceid",
+                "publicipv4",
+                "publichostname",
+                "amimanifestpath",
+                "localipv4",
+                "hostname",
+                "amiid",
+                "instancetype"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "amilaunchindex": {"type": "string"},
+                "localhostname": {"type": "string"},
+                "availabilityzone": {"type": "string"},
+                "instanceid": {"type": "string"},
+                "publicipv4": {"type": "string"},
+                "publichostname": {"type": "string"},
+                "amimanifestpath": {"type": "string"},
+                "localipv4": {"type": "string"},
+                "hostname": {"type": "string"},
+                "amiid": {"type": "string"},
+                "instancetype": {"type": "string"}
+            }
+        },
+        "dataCenterInfo": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+                "name": {"$ref": "#/$defs/dcNameType"},
+                "metadata": {"$ref": "#/$defs/amazonMetdataType"}
+            }
+        },
+        "leaseInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "evictionDurationInSecs": {"type": "integer"}
+            }
+        },
+        "appMetadataType": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Any": {
+                    "type": "array",
+                    "additionalItems": false,
+                    "items": {},
+                    "minItems": 0
+                }
+            }
+        },
+        "instance": {
+            "type": "object",
+            "required": [
+                "hostName",
+                "app",
+                "ipAddr",
+                "vipAddress",
+                "secureVipAddress",
+                "status",
+                "securePort",
+                "homePageUrl",
+                "statusPageUrl",
+                "healthCheckUrl",
+                "dataCenterInfo"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "hostName": {"type": "string"},
+                "app": {"type": "string"},
+                "ipAddr": {"type": "string"},
+                "vipAddress": {"type": "string"},
+                "secureVipAddress": {"type": "string"},
+                "status": {"$ref": "#/$defs/statusType"},
+                "port": {"type": "integer"},
+                "securePort": {"type": "integer"},
+                "homePageUrl": {"type": "string"},
+                "statusPageUrl": {"type": "string"},
+                "healthCheckUrl": {"type": "string"},
+                "dataCenterInfo": {"$ref": "#/$defs/dataCenterInfo"},
+                "leaseInfo": {"$ref": "#/$defs/leaseInfo"},
+                "metadata": {"$ref": "#/$defs/appMetadataType"}
+            }
+        },
+        "statusType": {
+            "type": "string",
+            "enum": [
+                "UP",
+                "DOWN",
+                "STARTING",
+                "OUT_OF_SERVICE",
+                "UNKNOWN"
+            ]
+        },
+        "dcNameType": {
+            "type": "string",
+            "enum": [
+                "MyOwn",
+                "Amazon"
+            ]
+        }
+    }
+}
